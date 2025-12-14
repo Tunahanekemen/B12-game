@@ -5,6 +5,7 @@ var skor = 0;
 var tıklamaizni = false;
 var enİyiSkor = 0;
 
+
 var oyunBaşladı = false;
 var seviye = 0;
 
@@ -24,6 +25,8 @@ butonlar.forEach(function(buton) {
         if (!oyunBaşladı) return;
 
         if (!tıklamaizni) return;
+
+        if (kullanıcıSırası.length === oyunSırası.length) return;
 
         var srenk = this.id;
 
