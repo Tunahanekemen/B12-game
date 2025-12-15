@@ -59,3 +59,46 @@ h1{
   background-color: red;
   opacity: 0.8;
 }
+
+/* --- MOBİL UYUMLULUK (RESPONSIVE) --- */
+
+/* Eğer ekran genişliği 600px'den küçükse (yani telefonsa) bu kurallar geçerli olsun */
+@media only screen and (max-width: 600px) {
+
+    .kutu-alanı {
+        /* Telefonda Flex yerine Grid kullanıyoruz */
+        display: grid;
+        
+        /* Ekranı 2 eşit parçaya böl (1fr 1fr) */
+        grid-template-columns: 1fr 1fr; 
+        
+        /* Kutuların genişliği ekranın %90'ı kadar olsun */
+        width: 100%;
+        max-width: 350px; /* Çok da devasa olmasın */
+        
+        gap: 30px; /* Kutular arası boşluk */
+        margin: 20px auto; /* Ortala */
+    }
+
+    .btn {
+        /* Genişliği elle verme, ızgaraya tam otursun */
+        width: 100% !important; 
+        
+        /* Yüksekliği biraz kısaltalım ki ekrana sığsın */
+        height: 120px !important; 
+        
+        /* Grid kullandığımız için kenar boşluğuna gerek yok */
+        margin: 0; 
+        
+        font-size: 3rem; /* Sembolleri küçült */
+    }
+
+    h1 {
+        font-size: 2rem;
+        margin-top: 20px;
+    }
+    
+    #skor-başlık {
+        font-size: 1.5rem;
+    }
+}

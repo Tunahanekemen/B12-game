@@ -9,20 +9,24 @@ var enİyiSkor = 0;
 var oyunBaşladı = false;
 var seviye = 0;
 
-document.addEventListener("keypress", function() {
-    if (!oyunBaşladı) {
-        document.querySelector("#başlık").textContent = "Seviye " + seviye;
-        sonrakiTur();
-        oyunBaşladı = true;
-    }
-});
+
 
 var butonlar = document.querySelectorAll(".btn");
 
 butonlar.forEach(function(buton) {
     buton.addEventListener("click", function() {
 
-        if (!oyunBaşladı) return;
+        
+        if (!oyunBaşladı) {
+     
+            document.querySelector("#başlık").textContent = "Seviye " + seviye;
+            
+    
+            sonrakiTur();
+            oyunBaşladı = true;
+            
+            return; 
+        }
 
         if (!tıklamaizni) return;
 
