@@ -4,11 +4,19 @@ var kullanıcıSırası = [];
 var skor = 0;
 var tıklamaizni = false;
 var enİyiSkor = 0;
-
-
 var oyunBaşladı = false;
 var seviye = 0;
-
+var sesKutup = {
+    "kırmızı": new Audio("sesler/kirmizi.mp3"),
+    "mavi": new Audio("sesler/mavi.mp3"),
+    "yeşil": new Audio("sesler/yesil.mp3"),
+    "sarı": new Audio("sesler/sari.mp3"),
+    "yanlis": new Audio("sesler/yanlis.mp3")
+};
+Object.values(sesKutup).forEach(function(ses) {
+    ses.preload = "auto";
+    ses.load();
+});
 
 
 var butonlar = document.querySelectorAll(".btn");
@@ -73,11 +81,10 @@ function kontrol(sırano) {
 
         bastan_başla();
 
-        var hatases = new Audio("sesler/yanlis.mp3");
-        hatases.play().catch(function(error) {
-            console.log("Ses çalma hatası: yanlis.mp3");
-        });
-    }
+        sesKutup["yanlis"].currentTime = 0;
+        sesKutup["yanlis"].play().catch(e => console.log(e));
+
+        }
 }
 function sonrakiTur() {
     kullanıcıSırası = [];
@@ -117,16 +124,17 @@ function animasyon(renk) {
     }, 150);
 }
 function sesCal(renkıd) {
-    var dosya = "";
-    if (renkıd === "kırmızı") dosya = "kirmizi.mp3";
-    else if (renkıd === "mavi") dosya = "mavi.mp3";
-    else if (renkıd === "yeşil") dosya = "yesil.mp3";
-    else if (renkıd === "sarı") dosya = "sari.mp3";
+    var ses = sesKutup[renkıd];
 
-    var ses = new Audio("sesler/" + dosya);
-    ses.play().catch(function(error) {
-        console.log("Ses çalma hatası: ", dosya);
-    });
+    if (ses) {
+        ses.currentTime = 0;
+        var oynat = ses.play();
+        if (oynat !== undefined) {
+            oynat.catch(function(error) {
+                console.log("Ses oynatılamadı: " + error);
+            });
+        }
+    }
 }
 
 
@@ -137,6 +145,6 @@ function bastan_başla() {
     oyunBaşladı = false;
     tıklamaizni = false;
 
-    document.querySelector("#başlık").innerHTML = "Oyun bitti. <br> Tekrar başlamak için bir tuşa basın";
+    document.querySelector("#başlık").innerHTML = "Oyun bitti. <br> Tekrar başlamak için bir renge dokun";
     document.querySelector("#skor").textContent = 0;
 }  
